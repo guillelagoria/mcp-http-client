@@ -1,0 +1,19 @@
+# Files to exclude from NPM package
+
+# Test files
+test-client.sh
+*.test.js
+
+# Development files
+.DS_Store
+*.log
+
+# Git files
+.git
+.gitignore
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
