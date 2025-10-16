@@ -316,11 +316,11 @@ Usage:
   mcp-http-client --url <server-url>
 
 Examples:
-  mcp-http-client https://latch-support-mcp.railway.app
-  mcp-http-client https://door-support-mcp.railway.app
+  mcp-http-client https://your-mcp-server.example.com
+  mcp-http-client https://api.example.com
 
 Environment Variable:
-  export MCP_SERVER_URL=https://your-server.railway.app
+  export MCP_SERVER_URL=https://your-mcp-server.example.com
   mcp-http-client
 
 Claude Desktop Configuration:
@@ -328,7 +328,7 @@ Claude Desktop Configuration:
     "mcpServers": {
       "knowledge-base": {
         "command": "npx",
-        "args": ["-y", "mcp-http-client", "https://your-server.railway.app"]
+        "args": ["-y", "mcp-http-client", "https://your-mcp-server.example.com"]
       }
     }
   }

@@ -58,14 +58,14 @@ You should see your package listed with all the information from package.json an
 
 ```bash
 # In a different directory, test installing via npx
-npx -y mcp-http-client https://latch-support-mcp-production.up.railway.app
+npx -y mcp-http-client https://your-mcp-server.example.com
 ```
 
-This should connect to the Latch server and show:
+This should connect to your server and show:
 ```
-🔌 Connecting to https://latch-support-mcp-production.up.railway.app...
-✅ Connected to latch-knowledge-mcp
-   📄 225 documents available
+🔌 Connecting to https://your-mcp-server.example.com...
+✅ Connected to your-service-name
+   📄 XXX documents available
 ```
 
 ## Troubleshooting
@@ -88,14 +88,6 @@ npm publish --access public
 
 ## After Publishing
 
-### Update the Latch MCP Documentation
-
-Once published, update the Latch repository to tell users about the easier installation method:
-
-1. Go to: `/Users/guille/Disco/Proyectos AI/MCP/latch-support-mcp`
-2. Update the README.md with instructions for using `mcp-http-client`
-3. Commit and push the changes
-
 ### Test with Claude Desktop
 
 1. Open Claude Desktop config: `~/Library/Application Support/Claude/claude_desktop_config.json`
@@ -103,15 +95,15 @@ Once published, update the Latch repository to tell users about the easier insta
 ```json
 {
   "mcpServers": {
-    "latch-knowledge": {
+    "my-knowledge-base": {
       "command": "npx",
-      "args": ["-y", "mcp-http-client", "https://latch-support-mcp-production.up.railway.app"]
+      "args": ["-y", "mcp-http-client", "https://your-mcp-server.example.com"]
     }
   }
 }
 ```
 3. Restart Claude Desktop
-4. Test by asking Claude to search the Latch knowledge base
+4. Test by asking Claude to search your knowledge base
 
 ## Future Updates
 

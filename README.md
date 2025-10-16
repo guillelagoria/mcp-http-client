@@ -1,18 +1,19 @@
 # MCP HTTP Client
 
-> 🚀 **Generic HTTP client for MCP servers** - Connect Claude Desktop to remote MCP knowledge bases without downloading anything!
+> 🚀 **Generic HTTP client for MCP servers** - Connect Claude Desktop to remote MCP servers over HTTP/HTTPS without downloading anything!
 
 ## What is this?
 
-This is a lightweight (~20KB) client that allows you to connect [Claude Desktop](https://claude.ai/download) to remote MCP (Model Context Protocol) servers over HTTP/HTTPS. Instead of downloading large repositories with PDFs and running them locally, this client connects to a remote server and fetches content on-demand.
+This is a lightweight (~20KB) client that allows you to connect [Claude Desktop](https://claude.ai/download) to remote MCP (Model Context Protocol) servers over HTTP/HTTPS. Instead of downloading large repositories and running them locally, this client connects to a remote server and fetches content on-demand.
 
 ## Features
 
-- ✅ **Zero local storage** - No need to download 100+ MB of PDFs
+- ✅ **Zero local storage** - No need to download large repositories
 - ✅ **Always up-to-date** - The remote server is updated automatically
 - ✅ **Works everywhere** - Cross-platform (macOS, Windows, Linux)
 - ✅ **Simple setup** - One-line configuration in Claude Desktop
 - ✅ **Multiple servers** - Connect to different knowledge bases easily
+- ✅ **Secure** - HTTPS support with certificate validation
 
 ## Installation
 
@@ -27,9 +28,9 @@ This is a lightweight (~20KB) client that allows you to connect [Claude Desktop]
 ```json
 {
   "mcpServers": {
-    "latch-knowledge": {
+    "my-knowledge-base": {
       "command": "npx",
-      "args": ["-y", "mcp-http-client", "https://latch-support-mcp-production.up.railway.app"]
+      "args": ["-y", "mcp-http-client", "https://your-mcp-server.example.com"]
     }
   }
 }
@@ -38,34 +39,6 @@ This is a lightweight (~20KB) client that allows you to connect [Claude Desktop]
 3. Restart Claude Desktop
 
 That's it! 🎉
-
-## Available Servers
-
-### Latch Support Knowledge Base
-```json
-{
-  "mcpServers": {
-    "latch-knowledge": {
-      "command": "npx",
-      "args": ["-y", "mcp-http-client", "https://latch-support-mcp-production.up.railway.app"]
-    }
-  }
-}
-```
-
-**Content**: 225+ documents including installation guides, spec sheets, troubleshooting, and more.
-
-### Door Support Knowledge Base (Coming Soon)
-```json
-{
-  "mcpServers": {
-    "door-knowledge": {
-      "command": "npx",
-      "args": ["-y", "mcp-http-client", "https://door-support-mcp-production.up.railway.app"]
-    }
-  }
-}
-```
 
 ## Available Tools
 
@@ -92,8 +65,8 @@ List all available categories in the knowledge base with document counts.
 
 After configuring Claude Desktop, you can ask Claude questions like:
 
-- "Search for Latch M2 installation guides"
-- "Show me all runbooks for Latch devices"
+- "Search for installation guides"
+- "Show me all available documentation"
 - "What categories are available in the knowledge base?"
 - "Get the full content of document XYZ"
 
@@ -145,7 +118,34 @@ GET /api/document     - Get document by ID (query param: id)
 GET /api/categories   - List all categories
 ```
 
-See the [Latch Support MCP repository](https://github.com/guillelagoria/latch-support-mcp) for a complete server implementation example.
+**Example Response Formats**:
+
+Health endpoint:
+```json
+{
+  "status": "ok",
+  "service": "my-knowledge-base",
+  "documents": 100
+}
+```
+
+Search endpoint:
+```json
+{
+  "query": "installation",
+  "totalResults": 5,
+  "results": [
+    {
+      "id": "doc123",
+      "title": "Installation Guide",
+      "category": "Getting Started",
+      "subcategory": "Setup",
+      "summary": "How to install...",
+      "content": "Full content here..."
+    }
+  ]
+}
+```
 
 ### Local Development
 
@@ -185,15 +185,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 MIT
 
-## Author
-
-Guille Lagoria
-
 ## Links
 
 - **GitHub**: https://github.com/guillelagoria/mcp-http-client
 - **NPM**: https://www.npmjs.com/package/mcp-http-client
-- **Example Server**: https://github.com/guillelagoria/latch-support-mcp
 - **MCP Documentation**: https://modelcontextprotocol.io
 
 ## Support

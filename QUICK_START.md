@@ -16,12 +16,14 @@ notepad %APPDATA%\Claude\claude_desktop_config.json
 
 ### Step 2: Add This Configuration
 
+Replace `https://your-mcp-server.example.com` with your actual MCP server URL:
+
 ```json
 {
   "mcpServers": {
-    "latch-knowledge": {
+    "my-knowledge-base": {
       "command": "npx",
-      "args": ["-y", "mcp-http-client", "https://latch-support-mcp-production.up.railway.app"]
+      "args": ["-y", "mcp-http-client", "https://your-mcp-server.example.com"]
     }
   }
 }
@@ -34,9 +36,9 @@ Quit and reopen Claude Desktop.
 ### Step 4: Try It!
 
 Ask Claude:
-- "What categories are available in the Latch knowledge base?"
-- "Search for Latch M2 installation guides"
-- "Show me all available runbooks"
+- "What categories are available in the knowledge base?"
+- "Search for installation guides"
+- "Show me all available documentation"
 
 Done! 🎉
 
@@ -58,7 +60,7 @@ See `PUBLISH_TO_NPM.md` for detailed instructions.
 
 ```bash
 # Test connection
-node index.js https://latch-support-mcp-production.up.railway.app
+node index.js https://your-mcp-server.example.com
 
 # Run test script
 ./test-client.sh
@@ -75,7 +77,7 @@ GET  /api/document     -> {id, title, content, ...}
 GET  /api/categories   -> {categories{}, totalDocuments}
 ```
 
-See https://github.com/guillelagoria/latch-support-mcp for a complete example.
+See the README for complete API specifications.
 
 ---
 
