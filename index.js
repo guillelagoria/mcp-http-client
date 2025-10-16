@@ -182,6 +182,24 @@ class HTTPMCPClient {
 
     text += `\n💡 Use get_document with the ID to see full content.`;
 
+    // Add metadata footer if available
+    if (data.metadata) {
+      text += `\n\n---\n`;
+      text += `📊 **Search Statistics:**\n`;
+      text += `   Searched: ${data.metadata.searched} documents\n`;
+      text += `   Found relevant: ${data.metadata.foundRelevant} documents\n`;
+      text += `   Returned: ${data.metadata.returned} documents\n`;
+
+      if (data.metadata.indexLastUpdated) {
+        const date = new Date(data.metadata.indexLastUpdated);
+        text += `   Index last updated: ${date.toLocaleDateString()}\n`;
+      }
+
+      if (data.metadata.disclaimer) {
+        text += `\n${data.metadata.disclaimer}`;
+      }
+    }
+
     return {
       content: [
         {
@@ -222,6 +240,21 @@ class HTTPMCPClient {
     }
     text += `\n---\n\n`;
     text += doc.content || 'No content available';
+
+    // Add source attribution footer
+    text += `\n\n---\n`;
+    text += `📚 **Source Information:**\n`;
+    text += `   **Title:** ${doc.title}\n`;
+    text += `   **Category:** ${doc.category}`;
+    if (doc.subcategory) {
+      text += ` > ${doc.subcategory}`;
+    }
+    text += `\n`;
+    if (doc.url) {
+      text += `   **Official URL:** ${doc.url}\n`;
+    }
+    text += `   **Document ID:** ${doc.id}\n`;
+    text += `\n⚠️ **Always verify critical information with official documentation.**`;
 
     return {
       content: [
