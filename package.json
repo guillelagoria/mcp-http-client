@@ -1,7 +1,7 @@
 {
   "name": "mcp-http-client",
-  "version": "1.0.1",
-  "description": "Generic HTTP client for MCP servers - Connect Claude Desktop to remote MCP servers via HTTP/HTTPS",
+  "version": "1.0.2",
+  "description": "HTTP transport adapter for MCP SDK stdio protocol implementation",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -13,14 +13,8 @@
   },
   "keywords": [
     "mcp",
-    "model-context-protocol",
-    "claude",
-    "claude-desktop",
-    "http-client",
-    "remote-mcp",
-    "knowledge-base",
-    "api-client",
-    "anthropic"
+    "http-transport",
+    "stdio-adapter"
   ],
   "author": "",
   "license": "MIT",
