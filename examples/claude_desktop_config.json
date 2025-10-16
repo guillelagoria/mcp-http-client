@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "latch-knowledge": {
+      "command": "npx",
+      "args": ["-y", "mcp-http-client", "https://latch-support-mcp-production.up.railway.app"]
+    },
+    "door-knowledge": {
+      "command": "npx",
+      "args": ["-y", "mcp-http-client", "https://door-support-mcp-production.up.railway.app"]
+    }
+  }
+}
