@@ -14,18 +14,19 @@ import fetch from 'node-fetch';
  */
 
 class HTTPMCPClient {
-  constructor(serverUrl) {
+  constructor(serverUrl, apiKey = null) {
     if (!serverUrl) {
       throw new Error('Server URL is required');
     }
 
     this.serverUrl = serverUrl.replace(/\/$/, ''); // Remove trailing slash
     this.serverInfo = null;
+    this.apiKey = apiKey || process.env.MCP_API_KEY; // Get API key from env or parameter
 
     this.server = new Server(
       {
         name: 'http-mcp-client',
-        version: '1.0.0',
+        version: '1.1.0',
       },
       {
         capabilities: {
@@ -42,6 +43,20 @@ class HTTPMCPClient {
       await this.server.close();
       process.exit(0);
     });
+  }
+
+  // Helper to make authenticated requests
+  async authenticatedFetch(url, options = {}) {
+    const headers = {
+      ...options.headers,
+    };
+
+    // Add API key if available
+    if (this.apiKey) {
+      headers['X-API-Key'] = this.apiKey;
+    }
+
+    return fetch(url, { ...options, headers });
   }
 
   async testConnection() {
@@ -147,7 +162,7 @@ class HTTPMCPClient {
       params.set('category', category);
     }
 
-    const response = await fetch(`${this.serverUrl}/api/search?${params}`);
+    const response = await this.authenticatedFetch(`${this.serverUrl}/api/search?${params}`);
 
     if (!response.ok) {
       throw new Error(`Search failed: ${response.status} ${response.statusText}`);
@@ -213,7 +228,7 @@ class HTTPMCPClient {
   async getDocument(args) {
     const { document_id } = args;
 
-    const response = await fetch(
+    const response = await this.authenticatedFetch(
       `${this.serverUrl}/api/document?id=${encodeURIComponent(document_id)}`
     );
 
@@ -267,7 +282,7 @@ class HTTPMCPClient {
   }
 
   async listCategories() {
-    const response = await fetch(`${this.serverUrl}/api/categories`);
+    const response = await this.authenticatedFetch(`${this.serverUrl}/api/categories`);
 
     if (!response.ok) {
       throw new Error(`Failed to list categories: ${response.status}`);
